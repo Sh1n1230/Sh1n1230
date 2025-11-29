@@ -1,7 +1,7 @@
 <h1 align="center">Hi 👋, I'm Shin</h1>
-<h3 align="center">The University of Electro-Communication Student</h3>
+<h3 align="center">The University of Electro-Communications Student</h3>
 
-- 🔭 I’m currently working on [Twillight](https://github.com/ufe514/Twilight)
+- 🔭 I’m currently working on [Twilight](https://github.com/ufe514/Twilight)
 
 - 🌱 I’m currently learning **Media and Information Studies**
 
