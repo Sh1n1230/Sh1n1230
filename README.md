@@ -3,7 +3,7 @@
 
 - 🌱 I’m currently learning **Media Information**
 
-- 👨‍💻 All of my projects are available at <a href="https://sh1n1230.github.io/my-portfolio/"><img src="https://img.shields.io/badge/Portfolio-25292e?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Portfolio"/></a>
+- 👨‍💻 All of my projects are available at <a href="https://sh1n1230.github.io/Portfolio/"><img src="https://img.shields.io/badge/Portfolio-25292e?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Portfolio"/></a>
 [https://sh1n1230.github.io/Portfolio/](https://sh1n1230.github.io/Portfolio/)
 
 <h3 align="left">Connect with me:</h3>
