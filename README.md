@@ -1,3 +1,7 @@
+## GitHub
+
+<img src="./metrics.classic.svg" alt="GitHub profile metrics" />
+
 ## GitHub Activity
 
 <img src="./metrics.plugin.isocalendar.fullyear.svg" alt="GitHub commit calendar" />
@@ -12,6 +16,6 @@
 
 ## Links
 
-- GitHub: https://github.com/Sh1n1230
-- Portfolio: https://sh1n1230.github.io/Portfolio/
-- Kaggle: https://www.kaggle.com/sh1n1230
+- GitHub: [https://github.com/Sh1n1230](https://github.com/Sh1n1230)
+- Portfolio: [https://sh1n1230.github.io/Portfolio/](https://sh1n1230.github.io/Portfolio/)
+- Kaggle: [https://www.kaggle.com/sh1n1230](https://www.kaggle.com/sh1n1230)
