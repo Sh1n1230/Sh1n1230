@@ -21,7 +21,6 @@ jobs:
           output_action: commit
           committer_token: ${{ github.token }}
           committer_branch: ${{ github.ref_name }}
-          plugin_lines: yes
 
       - name: Generate isometric commit calendar
         uses: lowlighter/metrics@latest
