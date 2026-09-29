@@ -1,25 +1,32 @@
-## GitHub
+<div align="center">
+  <a href="https://github.com/Sh1n1230">
+    <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub" />
+  </a>
+  <a href="https://sh1n1230.github.io/Portfolio/">
+    <img src="https://img.shields.io/badge/Portfolio-0078D4?style=flat-square&logo=googlechrome&logoColor=white" alt="Portfolio" />
+  </a>
+  <a href="https://www.kaggle.com/sh1n1230">
+    <img src="https://img.shields.io/badge/Kaggle-20BEFF?style=flat-square&logo=kaggle&logoColor=white" alt="Kaggle" />
+  </a>
+</div>
 
-<img src="./metrics.classic.svg" alt="GitHub profile metrics" />
+<br>
 
-## GitHub Activity
-
-<img src="./metrics.plugin.isocalendar.fullyear.svg" alt="GitHub commit calendar" />
-
-## Featured Repositories
-
-<img src="./metrics.plugin.repositories.svg" alt="Featured repositories" />
-
-## Languages
-
-<img src="./metrics.plugin.languages.svg" alt="Most used languages" />
-
-## Links
-
-- GitHub: [https://github.com/Sh1n1230](https://github.com/Sh1n1230)
-- Portfolio: [https://sh1n1230.github.io/Portfolio/](https://sh1n1230.github.io/Portfolio/)
-- Kaggle: [https://www.kaggle.com/sh1n1230](https://www.kaggle.com/sh1n1230)
-
-## Likes
-
-![Spotify Ranking](https://sh1n1230.github.io/SpotifyEmbedded/ranking.svg)
+<table width="100%">
+  <tr>
+    <td valign="top" width="33%" align="center">
+      <strong>GitHub Stats</strong>
+      <br><br>
+      <img src="./metrics.classic.svg" alt="GitHub profile metrics" />
+    </td>
+    <td valign="top" width="33%" align="center">
+      <strong>Mes Favoris</strong>
+      <img src="https://sh1n1230.github.io/SpotifyEmbedded/ranking.svg" alt="Spotify Ranking" />
+    </td>
+    <td valign="top" width="33%" align="center">
+      <strong>Contributions</strong>
+      <br><br>
+      <img src="./metrics.plugin.isocalendar.fullyear.svg" alt="GitHub contribution calendar" />
+    </td>
+  </tr>
+</table>
