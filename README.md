@@ -23,8 +23,12 @@
     </td>
     <td valign="top" width="33%" align="center">
       <h2><img src="./title.coup-de-coeur.svg" alt="Coup de Cœur" /></h2>
-      <!-- SpotifyEmbedded の実例として、常に最新の画像を外部から直接読み込む -->
-      <img src="https://sh1n1230.github.io/SpotifyEmbedded/ranking.svg" alt="Spotify の直近4週間の再生ランキング。上位5曲とランキング全体のムード要約" />
+      <!-- SpotifyEmbedded の実例として、常に最新の画像を外部から直接読み込む。
+           ranking.svg はダーク専用の配色なので、ライトテーマでは ranking-light.svg に切り替える -->
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://sh1n1230.github.io/SpotifyEmbedded/ranking.svg" />
+        <img src="https://sh1n1230.github.io/SpotifyEmbedded/ranking-light.svg" alt="Spotify の直近4週間の再生ランキング。上位5曲とランキング全体のムード要約" />
+      </picture>
       <br>
       <a href="https://sh1n1230.github.io/SpotifyEmbedded/top-tracks.json">曲名とアーティストを JSON で読む</a>
     </td>
