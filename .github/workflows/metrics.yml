@@ -2,34 +2,104 @@ name: GitHub Metrics
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    # 毎正時は混雑して遅延・取りこぼしが起きやすいため、分をずらしている
+    - cron: "17 0 * * *"
   workflow_dispatch:
 
-permissions:
-  contents: write
+# schedule と手動実行が重なっても push が競合しないよう、同じブランチでは直列にする
+concurrency:
+  group: metrics-${{ github.ref }}
+  cancel-in-progress: false
+
+# 権限はジョブごとに必要な分だけ付ける
+permissions: {}
 
 jobs:
   metrics:
-    runs-on: ubuntu-latest
+    # ランナーの版は Dependabot では上がらないため、切り替えは手作業で行う
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: write
     steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # 生成ステップはファイル出力だけにし、最後に 1 回だけまとめてコミットする。
+      # 片方だけ成功したときに、日付のずれた組み合わせが公開されないようにするため。
+      # use_prebuilt_image: no で、タグ参照の ghcr イメージではなく固定したコミットのソースからビルドする。
+      # （ただし上流の Dockerfile はベースイメージをタグで参照しているため、完全な固定ではない）
       - name: Generate classic profile
         uses: lowlighter/metrics@65836723097537a54cd8eb90f61839426b4266b6 # v3.34
         with:
+          use_prebuilt_image: no
           token: ${{ secrets.METRICS_TOKEN }}
           filename: metrics.classic.svg
           base: header, repositories
-          output_action: commit
-          committer_token: ${{ github.token }}
-          committer_branch: ${{ github.ref_name }}
+          output_action: none
+          config_timezone: Asia/Tokyo
+          # 既定の配色は明るい背景向けで、ダークテーマでは文字のコントラストが足りないため上書きする
+          extras_css: |
+            svg{color:#59636e}
+            h1,h2{color:#0969da}
+            @media (prefers-color-scheme: dark){
+              svg{color:#c9d1d9}
+              h1,h2{color:#58a6ff}
+            }
 
       - name: Generate isometric commit calendar
         uses: lowlighter/metrics@65836723097537a54cd8eb90f61839426b4266b6 # v3.34
         with:
+          use_prebuilt_image: no
           token: ${{ secrets.METRICS_TOKEN }}
           filename: metrics.plugin.isocalendar.fullyear.svg
           base: ""
-          output_action: commit
-          committer_token: ${{ github.token }}
-          committer_branch: ${{ github.ref_name }}
+          output_action: none
+          config_timezone: Asia/Tokyo
+          extras_css: |
+            svg{color:#59636e}
+            h2,h3{color:#0969da}
+            @media (prefers-color-scheme: dark){
+              svg{color:#c9d1d9}
+              h2,h3{color:#58a6ff}
+            }
           plugin_isocalendar: yes
           plugin_isocalendar_duration: full-year
+
+      - name: Commit generated metrics
+        run: |
+          # lowlighter/metrics はワークスペースではなく /metrics_renders に書き出す
+          cp /metrics_renders/metrics.classic.svg /metrics_renders/metrics.plugin.isocalendar.fullyear.svg .
+          git add metrics.classic.svg metrics.plugin.isocalendar.fullyear.svg
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update generated metrics"
+          # 実行中に人のコミットが入っても push が失敗しないよう、取り込んでから push する
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
+
+  # issues: write は METRICS_TOKEN を扱うジョブに持たせず、通知専用のジョブだけに付ける
+  report-failure:
+    needs: metrics
+    if: failure()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      issues: write
+    steps:
+      - name: Open an issue unless one is already open
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_TITLE: metrics ワークフローが失敗した
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          existing=$(gh issue list --state open --search "in:title \"$ISSUE_TITLE\"" --json number --jq 'length')
+          if [ "$existing" -eq 0 ]; then
+            gh issue create --title "$ISSUE_TITLE" \
+              --body "metrics ワークフローが失敗した（ブランチ: \`${GITHUB_REF_NAME}\`）。実行ログ: ${RUN_URL}"
+          fi
