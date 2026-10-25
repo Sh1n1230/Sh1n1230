@@ -1,0 +1,3 @@
+*.svg text eol=lf
+metrics.*.svg linguist-generated=true -diff
+title.*.svg linguist-generated=true

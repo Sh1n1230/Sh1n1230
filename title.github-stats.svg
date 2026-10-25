@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="640" height="110" viewBox="0 0 640 110">
+<style>@media (prefers-color-scheme: light){path[fill="#dce2ea"]{fill:#1f2328}path[fill="#7d8998"],text[fill="#7d8998"]{fill:#57606a}}</style>
 <rect width="640" height="110" fill="none"/>
 <path d="M589 -19C897 -19 1105 288 1105 744C1105 1201 897 1509 589 1509C281 1509 73 1201 73 744C73 288 281 -19 589 -19ZM589 65C333 65 160 337 160 744C160 1153 333 1425 589 1425C845 1425 1017 1153 1017 744C1017 337 845 65 589 65Z" transform="translate(19.37,87.00) scale(0.041992,-0.041992)" fill="#39424d"/>
 <path d="M502 1490H401L71 1269V1171L412 1399H413V0H502Z" transform="translate(68.79,87.00) scale(0.041992,-0.041992)" fill="#39424d"/>
